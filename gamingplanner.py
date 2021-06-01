@@ -11,35 +11,8 @@ app.secret_key = "ohpiH5ahy7ohg%u4ieb%aep5aehaos"
 app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql:///anders'
 db = SQLAlchemy(app)
 
-class Game(db.Model):
-  id = db.Column(db.Integer, primary_key=True)
-  title = db.Column(db.String, nullable=False)
-  platform = db.Column(db.String, nullable=False)
-  onsale = db.Column(db.Boolean, nullable=True, default=True)
-  price = db.Column(db.Float, nullable=False)
-  discount = db.Column(db.Integer, nullable=True)
-  bywhom = db.Column(db.String, nullable=False)
-  sale_ends_in_UTC = db.Column(db.Date, nullable=True)
-  added_autofilled =  db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
-  comment = db.Column(db.Text, nullable=True)
-
-#  userID = dbColumn(db.Integer, db.ForeignKey("users.id"), nullable=False) #
-#  user = db.relationship("User", backref=db.backref("Games", lazy=True)   #
-
-GameForm = model_form(Game, base_class=FlaskForm, exclude=["added_autofilled"], db_session=db.session)
-
-app.before_first_request
-def initDb():
-  db.create_all()
-
-  game = Game(title="Lost Planet 2", platform="Xbox 360", price="4.95", discount="75", bywhom="Jay", comment="Seems like a good 4-player title, should we grab it?")
-  db.session.add(game)
-
-  game = Game(title="Among US", platform="PC", price="3.95", bywhom="Ben", comment="It's a new release, would you guys be willing to play it with me?")
-  db.session.add(game)
-  db.session.commit()
-
 class User(db.Model):
+#  __tablename__="users"
   id = db.Column(db.Integer, primary_key=True)
   email = db.Column(db.String, nullable=False, unique=True)
   passwordHash = db.Column(db.String, nullable=False)
@@ -56,6 +29,34 @@ class UserForm(FlaskForm):
 
 class RegisterForm(UserForm):
   key = StringField("registration key", validators=[validators.InputRequired()])
+
+class Game(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  title = db.Column(db.String, nullable=False)
+  platform = db.Column(db.String, nullable=False)
+  onsale = db.Column(db.Boolean, nullable=True, default=True)
+  price = db.Column(db.Float, nullable=False)
+  discount = db.Column(db.Integer, nullable=True)
+  bywhom = db.Column(db.String, nullable=False)
+  sale_ends_in_UTC = db.Column(db.Date, nullable=True)
+  added_autofilled =  db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
+  comment = db.Column(db.Text, nullable=True)
+
+#  userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False) #
+#  user = db.relationship("User", backref=db.backref("Games", lazy=True))   #
+
+GameForm = model_form(Game, base_class=FlaskForm, exclude=["added_autofilled"], db_session=db.session)
+
+app.before_first_request
+def initDb():
+  db.create_all()
+
+  game = Game(title="Lost Planet 2", platform="Xbox 360", price="4.95", discount="75", bywhom="Jay", comment="Seems like a good 4-player title, should we grab it?")
+  db.session.add(game)
+
+  game = Game(title="Among US", platform="PC", price="3.95", bywhom="Ben", comment="It's a new release, would you guys be willing to play it with me?")
+  db.session.add(game)
+  db.session.commit()
 
 @app.errorhandler(403)
 def custom403(e):
@@ -151,6 +152,8 @@ def addView(id=None):
 
   if form.validate_on_submit():
     form.populate_obj(game)
+
+#   task.lastModifiedBy = User.query.get(session[uid])
     db.session.add(game)
     db.session.commit()
 
