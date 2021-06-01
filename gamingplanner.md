@@ -20,3 +20,14 @@ Due to limitations in time and skill, some of my ideas have been left to the fut
 
 ## Validity for business
 None at this stage. However, with a little bit of further development, it could be a fun free download. It really boils down to how keen me and my friends are using it - the test group is admittedly small, but after having been cumbersomely messaging people about sales and suggestions of what to play, I'm sure we'll give it an earnest go. 
+
+## Sources
+Course homepage: https://terokarvinen.com/2021/python-web-service-from-idea-to-production/ 
+Deploy Python Flask to production: https://terokarvinen.com/2020/deploy-python-flask-to-production/
+First steps on a new private virtual server: https://terokarvinen.com//2017/first-steps-on-a-new-virtual-private-server-an-example-on-digitalocean/
+Install postgre on Ubuntu: https://terokarvinen.com//2016/03/03/install-postgresql-on-ubuntu-new-user-and-database-in-3-commands/index.html?fromSearch=
+Forms: https://www.w3schools.com/css/css_form.asp
+Navbar: https://www.w3schools.com/css/css_navbar_horizontal.asp
+Table: https://www.w3schools.com/css/css_table.asp
+
+Furthermore, A LOT of the informations stems from the lectures and the examples provided by Tero Karvinen. 
