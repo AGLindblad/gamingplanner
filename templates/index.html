@@ -1,0 +1,37 @@
+{% set title="List the game you'd like us to play!" %}
+
+{% extends "base.html" %}
+
+{% block content %}
+  <h1> Game suggestions </h1>
+  <p> Here you can find suggestions made by yourself and others, the newest entry on top. You can use the edit button and comment field to provide a short comment if you like. 
+  <p> Code can be found at this <a href="https://github.com/AGLindblad/gamingplanner.git"> address </a> (GitHub). </p>
+<table>
+  <tr>
+    <th> Title </th>
+    <th> Platform </th>
+    <th> On sale? </th>
+    <th> Price </th>
+    <th> Discount% </th>
+    <th> Added by </th>
+    <th> Sale ends UTC </th>
+    <th> Comments </th>
+    <th> Edit </th>
+    <th> Delete </th>
+  </tr>
+{% for game in games %}
+  <tr>
+    <td>  {{ game.title }} </td> 
+    <td>  {{ game.platform }} </td>
+    <td>  {{ game.onsale }} </td>
+    <td>  {{ game.price }} </td>
+    <td>  {{ game.discount }} % </td>
+    <td>  {{ game.bywhom }} </td>
+    <td>  {{ game.sale_ends_in_UTC }} </td>
+    <td>  {{ game.comment }} </td>
+    <td>  <a href="/game/{{ game.id }}/edit">Edit Entry</a></td>
+    <td>  <a href="/game/{{ game.id }}/delete">Delete</a></td>
+  </tr>
+  {% endfor %}
+</table>  
+{% endblock content %}

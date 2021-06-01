@@ -1,0 +1,44 @@
+
+{% if not title %}
+  {% set title= "Base.html" %}
+{% endif %}
+
+<!Doctype html>
+<html lang=en>
+  <head>
+    <title> {{ title }} </title>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width; initial-scale=1">
+    <style>
+      {% include "style.css" %}
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a> &nbsp;</li>
+        <li><a href="/about">About</a> &nbsp;</li>
+        {% if currentUser() %}
+        <li><a href="/game/add">Add a game  </a> &nbsp;</li>
+        <li><a href="/user/logout">Log out </a> &nbsp;</li>
+        <a> Welcome, </a>
+        <strong> {{ currentUser().email }} </strong>
+        {% else %}
+        <li><a href="/user/login">Login </a> &nbsp;</li>
+        <li><a href="/user/register">Register </a></li>
+        {% endif %}
+      </ul>
+     </nav>
+
+    {% for msg in get_flashed_messages() %}
+      <p> {{ msg }} </p>
+    {% endfor %}
+
+    <h2> {{title}} </h2>
+    {% block content %}
+    <p> base.html </p>
+    {% endblock content %}
+  </body>
+</html>
+
