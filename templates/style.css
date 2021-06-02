@@ -83,3 +83,12 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: #4d4dff;
 }
+
+p {
+  font-family: verdana;
+  font-size: 16px;
+}
+
+/* https:// www.w3schools.com/css/css_form.asp 
+ https://www.w3schools.com/css/css_navbar_horizontal.asp 
+https://www.w3schools.com/css/css_table.asp */ 

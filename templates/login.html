@@ -6,7 +6,7 @@
   <form method=POST>
     <p> Please sign in with your e-mail address & password </p>
     {% for field in form %}
-      <div>
+      <p>
         {% if not field.flags.hidden %}
         {{ field.label }}
         {% endif %}
@@ -15,7 +15,7 @@
         {% for err in field.errors %}
           <p> {{ err }} </p>
         {% endfor %}
-      </div>
+      </p>
     {% endfor %}
 
     <input type=submit value="Log in">
